@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import nashtech.phucldh.spring.entity.Employee;
 import nashtech.phucldh.spring.service.EmployeeDAO;
 
+@Repository
 public class EmployeeDAOImpl implements EmployeeDAO{
 	
 	private EntityManager entityManager;
@@ -26,7 +27,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	@Transactional
 	public List<Employee> findAll() {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Query<Employee> theQuery = currentSession.createQuery("from Customer", Employee.class);
+		Query<Employee> theQuery = currentSession.createQuery("from Employee", Employee.class);
 		List<Employee> customers = theQuery.getResultList();
 		return customers;
 	}
@@ -57,8 +58,8 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 	@Transactional
 	public void deleteEmployee(int theId) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Query theQuery = currentSession.createQuery("delete from Customer where id=:customerId");
-		theQuery.setParameter("customerId", theId);
+		Query theQuery = currentSession.createQuery("delete from Employee where id=:employeeId");
+		theQuery.setParameter("employeeId", theId);
 		theQuery.executeUpdate();
 	}
 	
